@@ -37,7 +37,7 @@ const ascii = `
 `;
 
 const nodes = [
-  "inj17c63wa43e65vexaqg3vptfjaqzupe9kwc7pd23",
+  "inj1qfd8vwq0j4ps2mn0felam8f4u8a5xvxn39ezfy",
   "inj1wgvjaat3gna8dvuz7vqv6jmveng8kftlxklxjr",
   "inj1h9uwgtd9dfcgfzvr870ge0cxq3erqrvzd2r5fz",
 ];
