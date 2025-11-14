@@ -175,7 +175,7 @@ async function getAstBalance(address: string): Promise<string> {
   try {
     const res = await bankApi.fetchBalance({
       accountAddress: address,
-      denom: "factory/inj1k9hde84nufwmzq0wf6xs4jysll60fy6hd72ws2/AST",
+      denom: "factory/inj1phgq0dp2fddqtuz9rkzcrfrz39wpcxmgf0ykj2/AST",
     });
 
     return res.amount || "0";
