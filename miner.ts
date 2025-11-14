@@ -58,6 +58,7 @@ const FINALIZE_COOLDOWN_MS = 4000;
 const BEST_POLL_MS = Number("5000");
 
 let logoShown = false;
+let USER_CORES: number | null = null;
 
 let HUD_LINES = 0;
 function renderHUD(lines: any[]) {
@@ -397,7 +398,23 @@ async function mineOneContract(
   const height = work.height ?? contest.height ?? "?";
 
   const cpu = os.cpus()?.length || 1;
-  const nWorkers = threads > 0 ? threads : Math.max(1, cpu);
+  
+  if (USER_CORES === null) {
+    const coreInput = await prompt(
+      `\nDetected ${cpu} CPU cores. How many cores do you want to use? (1-${cpu}): `
+    );
+    const inputNum = parseInt(coreInput.trim());
+    
+    if (isNaN(inputNum) || inputNum < 1 || inputNum > cpu) {
+      console.log(C.y(`Invalid input. Using all ${cpu} cores.`));
+      USER_CORES = cpu;
+    } else {
+      USER_CORES = inputNum;
+      console.log(C.g(`Using ${USER_CORES} core(s) for mining.\n`));
+    }
+  }
+  
+  const nWorkers = threads > 0 ? threads : USER_CORES;
   const baseBatch = 100_000;
 
   const workers: Worker[] = [];
